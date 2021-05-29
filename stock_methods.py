@@ -8,10 +8,11 @@ import time
 from datetime import datetime, date, timedelta
 from polygon import RESTClient
 import talib
+from polygon_keys import polygon_key
 
 
 def get_data_by_hour(symbol):
-    key = 'YZj_Ugd4fkCRX57STH5MeItRlAz31DRN'
+    key = polygon_key
     client = RESTClient(key)
     query = True
     from_date = "2012-01-01"
