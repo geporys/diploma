@@ -23,7 +23,7 @@ def get_data_by_hour(symbol):
     while query:
         print(from_date)
         resp = client.stocks_equities_aggregates(
-            symbol, 1, "hour", from_date, to_date, unadjusted=True, limit=50000)
+            symbol, 1, "hour", from_date, to_date, unadjusted=False, limit=50000)
         if 'results' in dir(resp):
             results = resp.results
             data_for_df = data_for_df + results[:-1]
@@ -137,13 +137,13 @@ def create_features(i, data_stock):
     low = df[f'low_{i}']
     close = df[f'close_{i}']
     volume = df[f'volume_{i}']
-    # rsi = df[f'rsi_{i}']
+    rsi = df[f'rsi_{i}']
     features = pd.DataFrame(index=data_stock.index)
     features[f'volume_{i}'] = volume
     features[f'price_spread_{i}'] = high - low
     features[f'close_loc_{i}'] = (high - close) / (high - low)
     features[f'close_change_{i}'] = close.diff()
-    # features[f'rsi_{i}'] = rsi
+    features[f'rsi_{i}'] = rsi
 
     return features
 
